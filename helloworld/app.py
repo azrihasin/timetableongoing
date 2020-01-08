@@ -31,6 +31,8 @@ def show():
         data, arr = process(f.filename)
         print(type(arr))
 
+      
+
         #load = json.loads(data)
         return render_template("timetable.html", data=data)
 

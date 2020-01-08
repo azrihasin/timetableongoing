@@ -89,9 +89,9 @@
   </div>
 
   <button id="check" type="button" name="button">Check</button>
-  <button id="sub" type="button" name="button">Subject</button>
-  <button id="custom" type="button" name="button">Customize</button>
-
+  <button id="sub" type="button" name="button" style="display:none;">Subject</button>
+  <button id="custom" type="button" name="button" style="display:none;">Customize</button>
+ 
 
 
   <hr />
@@ -295,7 +295,7 @@
   <embed id="pdfview" type="application/pdf" />
 
 
-  <div id="ELEMENT">
+  <div id="ELEMENT" style="display:none;">
 
     <ul id="SUBJECTELEMENT">
 
@@ -304,7 +304,7 @@
 
   </div>
 
-  <div id="CUSTOMIZE">
+  <div id="CUSTOMIZE" style="display:none;">
 
     <ul id="CUSTOMIZEELEMENT">
 
@@ -357,7 +357,7 @@
       <input type="submit" id="deleteedit" name="button" value="Delete">
   </div>
 
-  <!-- <script type="text/javascript" src="{{ url_for('static', filename='timetable.js') }}"></script> -->
+   <!-- <script type="text/javascript" src="{{ url_for('static', filename='timetable.js') }}"></script>  -->
   <script>
 
 
@@ -368,41 +368,41 @@
 
     var editindex;
 
-    document.getElementById("pdf-upload").addEventListener("change", function (e) {
-      var canvasElement = document.getElementById("canvas");
-      var file = e.target.files[0]
-      if (file.type != "application/pdf") {
-        console.error(file.name, "is not a pdf file.");
-        return
+   
+
+    document.getElementById("convert").addEventListener("click", function(){
+      var pdfupload=document.getElementById('pdf-upload');
+      //var file = e.target.files[0]
+    
+     //console.log(file);
+      
+    
+      var pdfview=document.getElementById('pdfview');
+      pdfview.src="{{ url_for('static', filename='Confirmation Slip.pdf') }}";
+    
+    //alert(file.name);
+    
+    
+    })
+
+    
+  /*  document.getElementById('pdf-upload').addEventListener('change', readPDF, true);
+    function readPDF() {
+      var file = document.getElementById("pdf-upload").files[0];
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        document.getElementById('pdfview').style.backgroundImage = "url(" + reader.result + ")";
+      }
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
       }
 
-      var fileReader = new FileReader();
-
-      fileReader.onload = function () {
-        var typedarray = new Uint8Array(this.result);
-
-        PDFJS.getDocument(typedarray).then(function (pdf) {
-          // you can now use *pdf* here
-          console.log("the pdf has ", pdf.numPages, "page(s).");
-          pdf.getPage(pdf.numPages).then(function (page) {
-            // you can now use *page* here
-            var viewport = page.getViewport(2.0);
-            var canvas = document.querySelector("canvas")
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+      alert("url(" + reader.result + ")");
+    }*/
 
 
-            page.render({
-              canvasContext: canvas.getContext('2d'),
-              viewport: viewport
-            });
-          });
-
-        });
-      };
-
-      fileReader.readAsArrayBuffer(file);
-    })
+    
 
     document.getElementById("convert").addEventListener("click", function () {
 
@@ -480,11 +480,11 @@
 
 
 
-    
+
 
       (function (x) {
 
-       
+
 
         if (masa >= 420 && masa <= 1350 && masa1 >= 420 && masa1 <= 1350) {
 
@@ -1435,7 +1435,7 @@
           var d = document.querySelectorAll('input[type=color]');
           var f = document.getElementById('SUBJECTELEMENT').querySelectorAll('input[type=text]');
 
-         
+
 
 
           var letters = '0123456789ABCDEF';
@@ -1587,15 +1587,14 @@
     })
 
 
-    document.getElementById("check").addEventListener("click", function () {
-      document.getElementById('ELEMENT').style.visibility = "hidden";
-      document.getElementById('pdfview').style.visibility = "visible";
-      document.getElementById('SUBJECTELEMENT').style.visibility = "hidden";
-      document.getElementById('CUSTOMIZE').style.visibility = "hidden";
-      document.getElementById('CUSTOMIZEELEMENT').style.visibility = "hidden";
-
+    document.getElementById("check").addEventListener("click", function(){
+      document.getElementById('ELEMENT').style.visibility="hidden";
+      document.getElementById('pdfview').style.visibility="visible";
+      document.getElementById('SUBJECTELEMENT').style.visibility="hidden";
+      document.getElementById('CUSTOMIZE').style.visibility="hidden";
+      document.getElementById('CUSTOMIZEELEMENT').style.visibility="hidden";
+    
     });
-
 
     document.getElementById("sub").addEventListener("click", function () {
       document.getElementById('ELEMENT').style.visibility = "visible";
@@ -2650,9 +2649,9 @@
       var d = document.querySelectorAll('input[type=color]');
       var f = document.getElementById('SUBJECTELEMENT').querySelectorAll('input[type=text]');
 
-      
-     console.log(j);
-     console.log(x);
+
+      console.log(j);
+      console.log(x);
 
 
       var w = 1;
@@ -2665,7 +2664,7 @@
         str = str.replace("Remove", "");
         str1 = str1.replace("Remove", "");
 
-        
+
 
         if (str == str1) {
 
@@ -2686,7 +2685,7 @@
 
           c[w].id;
 
-       if (daychoose == "MON") {
+          if (daychoose == "MON") {
             document.getElementById(c[w].id).className = c[w].className;
             d[w - 1].className = c[w].className;
             f[w - 1].className = c[w].className;
@@ -2753,7 +2752,7 @@
 
           var letters = '0123456789ABCDEF';
           var color = '#';
-    
+
           for (var z = 0; z < 6; z++) {
             color += letters[Math.floor(Math.random() * 16)];
           }
@@ -2796,7 +2795,7 @@
 
 
 
-    
+
     }
 
 

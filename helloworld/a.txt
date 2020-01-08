@@ -1,31 +1,38 @@
-Printed by 1812129 on 22-Nov-2019, 06:00 pm International Islamic University Malaysia
+Printed by 1813785 on 02-Nov-2019, 02:08 pm
+
+Session : 2019/2020 Semester : 1
+
+International Islamic University Malaysia
 Course Registration Confirmation Slip
-Session : 2019/2020 Semester : 2
 
  
 
-MatricNo  : 1812129 IC/Passport No.: 991216016715 Program : BIT
-
-Name : MUHAMMAD HAMMIZIE BIN ZAMRI Level : 2
+MatricNo =: 1813785 IC/Passport No.: 990704145271 Program : BIT
+Name : MUHAMMAD AZRI BIN HASIN Level : 2
 Course Sec Sta Title Chr Day Time Venue
-CSC 2602 4 R PRINCIPLES OF IT SECURITY 3 M-W 11.30 -12.50 AM
-CSC 3401 3 R OPERATING SYSTEM 3 M-W 10.00 -11.20 AM ICTLR19 LEVEL 4C
-INFO 2501 1 R MANAGEMENT INFORMATION SYSTEM 3 M-W 2.00 -3.20 PM ICT TL-E5-01 LEVEL SE
-INFO 3305 3 R WEB APPLICATION DEVELOPMENT 3 T-TH 3.30 -4.50 PM ICT TEACH LAB 8 TL-D4
-
-WED 5.00 -6.50 PM
-INFO 3401 3 R HUMAN COMPUTER INTERACTION 3 T-TH 2.00 -3.20 PM ICT TL-C4-02 LEVEL 4C
-UNGS 2011 36 R CREATIVE THINKING AND PROBLEM 2 TUE 10.00 -11.50 AM IRKLR 14 RKLVL1
+CSC 2201 2 R COMPUTER NETWORKING 3 T-TH 10.00 - 11.20 AM ICT TEACH LAB 6 LEVEL
+INFO 2103 2 R DATABASE PROGRAMMING 3 T-TH 2.00 -3.20 PM ICT TEACH LAB 8 TL-D4
+TUE 5.00 -6.50 PM
+INFO 2201 2 R MULTIMEDIA TECHNOLOGY 3 M-W 11.30 - 12.50 AM ICT MMEDIALAB TL-E4-
+TUE 5.00 -6.50 PM ICT MMEDIALAB TL-E4-
+INFO 2401 3 R SYSTEMS ANALYSIS AND DESIGN 3 T-TH 11.30 - 12.50 AM ICT TL-D5-04 LEVEL 5D
+MPU 3122 19 R TAMADUN ISLAM DAN TAMADUN ASIA 2 FRI 10.30 - 12.20 AM ADMLT 22.111
+(TITAS)
+UNGS 2011 40 R CREATIVE THINKING AND PROBLEM 2 WED 4.00 -5.50 PM IRKLR13 RK LVL 1
 SOLVING
-LE 4000 12 RSV ENGLISH FOR ACADEMIC WRITING Oo M-W 8.30 -9.50 AM
-Total 17
+Total 16
 
 Announcement from Academic Management and Admission Division
 
-Commencement of Semester 2, 2019/2020 - (Pagoh Campus: 9th February 2020/ Sunday)
-Commencement of Semester 2, 2019/2020 -(Gombak & Kuantan Campus: 10th February 2020/ Monday)
-Undergraduates have to register minimum of 15 credit hours in the regular semester
+Commencement of Semester 1, 2019/2020 - (Pagoh Campus: 8th September 2019/ Sunday)
 
-Online Course Registration - (20th November 2019 until 14th February 2020)
+Commencement of Semester 2, 2018/2019 - (Pagoh Campus:9th February 2020/ Sunday)
+
+Commencement of Semester 1, 2019/2020 -(Gombak & Kuantan Campus: 9th September 2019/ Monday)
+Commencement of Semester 2, 2018/2019 -(Gombak & Kuantan Campus:10th February 2020/ Monday)
+Online Course Registration - (20th November! 2019 until 14th February 2020)
+Undergraduates have to register minimum of 15 credit hours in the regular semester .
+
+Online Course Registration - (17th April 2019 until 13th September 2019)
 
 1
