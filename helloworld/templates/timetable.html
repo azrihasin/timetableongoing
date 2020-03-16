@@ -2,8 +2,10 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="{{ url_for('static',filename='timetable.css') }}">
+ 
+  <link rel="stylesheet" href="{{ url_for('static',filename='timetable.css') }}"> 
+  <!-- <link rel="stylesheet" href="timetable.css"> -->
+
 
   <style media="screen">
   </style>
@@ -28,6 +30,8 @@
       <p>Convert crs into timetable</p>
     </div>
 
+    <button id="addsubject" type="button" name="button" >Add subject</button>
+
     <form action="/show" method="post" enctype="multipart/form-data">
       <label id="chooselab" for="pdf-upload">Choose file</label>
       <input type="file" id="pdf-upload" name="file" />
@@ -38,60 +42,15 @@
 
   <input type="button" id="convert" value="Convert">
 
-  <div id="input">
-
-
-
-    <p>SUBJECT
-
-      <input id="timetable" type="text" value="" name="subject">
-
-
-
-
-      DAY
-
-      <select id="day" name="day">
-        <option value="SUN">SUN</option>
-        <option value="MON">MON</option>
-        <option value="TUE">TUE</option>
-        <option value="WED">WED</option>
-        <option value="THUR">THUR</option>
-        <option value="FRI">FRI</option>
-        <option value="SAT">SAT</option>
-      </select>
-
-
-      START TIME
-
-      <input id="time_start" type="time" name="time_start">
-
-
-      END TIME
-
-      <input id="time_end" type="time" name="time_end">
-
-
-
-
-
-      <input type="submit" id="add" onClick="myFunction()" name="button" value="+">
-
-    </p>
-
-
-
-  </div>
-
   <div id="change">
     <input id="wallpaper" type="file" name="" value="">
-    <input id="opacity" type="number" step="0.1" min="0.1" max="1" value="">
+    <input id="opacity" type="number" step="0.1" min="0.1" max="1" value="1">
   </div>
 
   <button id="check" type="button" name="button">Check</button>
   <button id="sub" type="button" name="button" style="display:none;">Subject</button>
   <button id="custom" type="button" name="button" style="display:none;">Customize</button>
- 
+
 
 
   <hr />
@@ -138,128 +97,6 @@
 
     </div>
 
-    <div class="TIME">
-
-      <div id="seven">
-
-        <p>7:00</p>
-
-      </div>
-
-      <div id="sevenhalf">
-
-        <p>7:30</p>
-
-      </div>
-
-      <div id="eight">
-
-        <p>8:00</p>
-
-      </div>
-
-      <div id="eighthalf">
-
-        <p>8:30</p>
-
-      </div>
-
-      <div id="nine">
-        <p>9:00</p>
-      </div>
-
-      <div id="ninehalf">
-        <p>9:30</p>
-      </div>
-
-      <div id="ten">
-        <p>10:00</p>
-      </div>
-
-      <div id="tenhalf">
-        <p>10:30</p>
-      </div>
-
-      <div id="eleven">
-        <p>11:00</p>
-      </div>
-
-      <div id="elevenhalf">
-        <p>11:30</p>
-      </div>
-
-      <div id="twelve">
-        <p>12:00</p>
-      </div>
-
-      <div id="twelvehalf">
-        <p>12:30</p>
-      </div>
-
-      <div id="thirteen">
-        <p>13:00</p>
-      </div>
-
-      <div id="thirteenhalf">
-        <p>13:30</p>
-      </div>
-
-      <div id="fourteen">
-        <p>14:00</p>
-      </div>
-
-      <div id="fourteenhalf">
-        <p>14:30</p>
-      </div>
-
-      <div id="fifthteen">
-        <p>15:00</p>
-      </div>
-
-      <div id="fifthteenhalf">
-        <p>15:30</p>
-      </div>
-
-      <div id="sixthteen">
-        <p>16:00</p>
-      </div>
-
-      <div id="sixthteenhalf">
-        <p>16:00</p>
-      </div>
-
-      <div id="seventeen">
-        <p>17:00</p>
-      </div>
-
-      <div id="seventeenhalf">
-        <p>17:30</p>
-      </div>
-
-      <div id="eightteen">
-        <p>18:00</p>
-      </div>
-
-      <div id="eightteenhalf">
-        <p>18:30</p>
-      </div>
-
-      <div id="nineteen">
-        <p>19:00</p>
-      </div>
-
-      <div id="nineteenhalf">
-        <p>19:30</p>
-      </div>
-
-      <div id="twenty">
-        <p>20:00</p>
-      </div>
-
-
-    </div>
-
-
 
     <div id="MON">
 
@@ -292,7 +129,7 @@
 
   </div>
 
-  <embed id="pdfview" type="application/pdf" />
+  <embed id="pdfview" type="application/pdf" style="display:none;" />
 
 
   <div id="ELEMENT" style="display:none;">
@@ -318,111 +155,205 @@
 
   </div>
 
-  <div class="edit" id="edit">
+  <div class="addsub" id="addsub" style="visibility:hidden;">
 
-    <p>SUBJECT
+    <p style="display:inline">Subject</p>
+    <input id="subjectadd" type="text" name="" value=""style="width:120px;height:17px;margin-left:7px;padding:4px;">
 
-      <input id="timetableedit" type="text" value="" name="subject">
+    <br><br>
 
-      <br>
+    <p style="margin-left:10px;display:inline">Color</p>
+    <input id="coloradd" style="margin-left:10px;" type="color" name="" value="#F58080">
+
+    <br><br>
+
+    <p style="margin-left:15px;display:inline">Day</p>
+    
+    
+    <select id="day" name="day" >
+      <option value="SUN">SUN</option>
+      <option value="MON">MON</option>
+      <option value="TUE">TUE</option>
+      <option value="WED">WED</option>
+      <option value="THUR">THUR</option>
+      <option value="FRI">FRI</option>
+      <option value="SAT">SAT</option>
+    </select>
+  
+
+    <br><br>
+
+    <p style="display:inline";>Start time</p>
+
+    <input id="time_start"style="display:inline;margin:5px;" type="time" name="" value="08:00">
+
+    <br>
+
+    <p style="display:inline;">End time</p>
+
+    <input id="time_end" style="display:inline;margin:10px;" type="time" name="" value="09:00">
+
+    <br>
+
+<div style="position:absolute;bottom:0;margin:20px;right:5px;"class="">
+  <button id="doneadd" style="display: inline;" type="button" name="button">Done</button>
+  <button id="canceladd"style="display: inline;"type="button" name="button">Cancel</button>
+
+</div>
 
 
-      DAY
-
-      <select id="dayedit" name="day">
-        <option value="SUN">SUN</option>
-        <option value="MON">MON</option>
-        <option value="TUE">TUE</option>
-        <option value="WED">WED</option>
-        <option value="THUR">THUR</option>
-        <option value="FRI">FRI</option>
-        <option value="SAT">SAT</option>
-      </select>
-
-      <br>
-      START TIME
-
-      <input id="time_startedit" type="time" name="time_start">
-      <br>
-      END TIME
-
-      <input id="time_endedit" type="time" name="time_end">
-      <br>
-
-      <input id="coloredit" type="color">
-
-      <br>
-      <input type="submit" id="addedit" name="button" value="Confirm">
-      <input type="submit" id="canceledit" name="button" value="Cancel">
-      <input type="submit" id="deleteedit" name="button" value="Delete">
   </div>
 
-   <!-- <script type="text/javascript" src="{{ url_for('static', filename='timetable.js') }}"></script>  -->
+  <div class="edit" id="edit" style="visibility:hidden;">
+
+    <p style="display:inline">Subject</p>
+    <input id="subjectedit" type="text" name="" value=""style="width:120px;height:17px;margin-left:7px;padding:4px;">
+
+    <br><br>
+
+    <p style="margin-left:10px;display:inline">Color</p>
+    <input id="coloredit" style="margin-left:10px;" type="color" name="" value="#F58080">
+
+    <br><br>
+
+    <p style="margin-left:15px;display:inline">Day</p>
+    
+    
+    <select id="dayedit" name="day" >
+      <option value="SUN">SUN</option>
+      <option value="MON">MON</option>
+      <option value="TUE">TUE</option>
+      <option value="WED">WED</option>
+      <option value="THUR">THUR</option>
+      <option value="FRI">FRI</option>
+      <option value="SAT">SAT</option>
+    </select>
+
+    <br><br>
+
+    <p style="display:inline";>Start time</p>
+
+    <input id="time_startedit"style="display:inline;margin:5px;" type="time" name="" >
+
+    <br>
+
+    <p style="display:inline;">End time</p>
+
+    <input id="time_endedit" style="display:inline;margin:10px;" type="time" name="" >
+
+    <br>
+
+<div style="position:absolute;bottom:0;margin:20px;right:5px;"class="">
+  <button id="doneedit" style="display: inline;" type="button" name="button">Done</button>
+  <button id="canceledit"style="display: inline;"type="button" name="button">Cancel</button>
+  <button id="delete"type="button" name="button">Delete</button>
+</div>
+
+
+  </div>
+
+
+
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='timetable.js') }}"></script>  -->
   <script>
 
+var editindex;
+
+var index = [];
+var subjecttimetable=[];
+var daytimetable=[];
+var time_starttimetable=[];
+var time_endtimetable=[];
+var colortimetable=[];
+var toptimetable=[];
+var heighttimetable=[];
 
 
-    document.getElementById("canceledit").addEventListener("click", function () {
-      document.getElementById("edit").style.display = "none";
-    });
 
-    var editindex;
+function constructtimetable(){
 
+  console.log(index.length);
+
+  for(var i=0;i<index.length;i++){
    
+   if(i > 0 && i < index.length-1 ){
 
-    document.getElementById("convert").addEventListener("click", function(){
-      var pdfupload=document.getElementById('pdf-upload');
-      //var file = e.target.files[0]
-    
-     //console.log(file);
+    document.getElementById(i).remove();
+
+   }
       
-    
-      var pdfview=document.getElementById('pdfview');
-      pdfview.src="{{ url_for('static', filename='Confirmation Slip.pdf') }}";
-    
-    //alert(file.name);
-    
-    
-    })
+  }
 
-    
-  /*  document.getElementById('pdf-upload').addEventListener('change', readPDF, true);
-    function readPDF() {
-      var file = document.getElementById("pdf-upload").files[0];
-      var reader = new FileReader();
-      reader.onloadend = function () {
-        document.getElementById('pdfview').style.backgroundImage = "url(" + reader.result + ")";
-      }
-      if (file) {
-        reader.readAsDataURL(file);
-      } else {
-      }
+  for(var i=0;i<index.length;i++){  
 
-      alert("url(" + reader.result + ")");
-    }*/
+    create(toptimetable[i],heighttimetable[i],subjecttimetable[i],index[i],daytimetable[i],time_starttimetable[i],time_endtimetable[i],colortimetable[i]);
+  }
+}
+
+function colorgenerator(){
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+
+  for (var z = 0; z < 6; z++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+}
 
 
-    
+  document.getElementById('addsubject').addEventListener("click", function () {
 
-    document.getElementById("convert").addEventListener("click", function () {
-
-
-
+    openaddsub();
+  });
 
 
-      var info = {{ data| safe
-    }};
+function openaddsub() {
+  document.getElementById('addsub').style.visibility="visible";
+};
+
+document.getElementById("doneadd").addEventListener("click",myFunction);
+
+document.getElementById('canceladd').addEventListener("click", function () {
+  document.getElementById('addsub').style.visibility="hidden";
+});
 
 
-    var array = [];
+
+document.getElementById('canceledit').addEventListener("click", function () {
+
+  document.getElementById('edit').style.visibility="hidden";
+});
+
+
+
+function enablingbutton(){
+
+  var enable=false;
+
+  if(document.getElementById('subjectadd').value==""){
+    alert("Please fill the subject ");
+  }
+  else {
+    enable=true;
+  }
+
+  return enable;
+}
+
+//  
+
+document.getElementById("convert").addEventListener("click", function () {
+
+    {% if data %}
+    var info = {{ data| safe }};
+    {% endif %}
 
     var info = JSON.stringify(info);
 
     var data = JSON.parse(info);
 
     for (var i = 0; i < data.length; i++) {
-
-
 
       var subject = data[i].SUBJECT;
 
@@ -476,3480 +407,438 @@
       var top = toptext + "px";
 
 
-      var combine = time_start + ' - ' + time_end;
+      
+       time_start = time_start.replace(".", ":");
+       time_end = time_end.replace(".", ":");
+
+      time_start = (hour+':'+fields[1]).trim();
+      time_end =( hour1+':'+fields1[1]).trim();
+
+     
+
+      
+
+      var x=index.length;
 
 
+ 
+      var color;
+
+      
 
 
+        if (masa >= 420 && masa <= 1200 && masa1 >= 420 && masa1 <= 1200){
 
-      (function (x) {
-
-
-
-        if (masa >= 420 && masa <= 1350 && masa1 >= 420 && masa1 <= 1350) {
-
-
-          if (daychoose == "MON") {
-
-
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-              var colorvalue = document.getElementById(editindex).style.background;
-
-              console.log(colorvalue);
-
-              function rgb2hex(rgb) {
-                if (/^#[0-9A-F]{6}$/i.test(rgb)) return rgb;
-
-                rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-                function hex(x) {
-                  return ("0" + parseInt(x).toString(16)).slice(-2);
+          found = false;
+          function linearSearch(subject, subjecttimetable) {
+            
+            position = -1;
+            start = 0;
+         
+            while(!found && start < subjecttimetable.length) {
+                if(subjecttimetable[start] == subject) {
+                    found = true;
+                    position = start;
+                  
+  
+                      color=colortimetable[position]; 
+                    
+                } else {
+                    start += 1;
+                      
                 }
-                return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-              }
-
-
-
-              var colorcode = rgb2hex(colorvalue);
-
-
-              console.log(colorcode);
-
-              document.getElementById("coloredit").value = colorcode;
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.setAttribute("id", x);
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('MON').appendChild(div);
-            document.getElementById('MON').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-
-
-
-          }
-          else if (daychoose == "TUE") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('TUE').appendChild(div);
-            document.getElementById('TUE').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-          }
-          else if (daychoose == "WED") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('WED').appendChild(div);
-            document.getElementById('WED').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-
-          }
-          else if (daychoose == "THUR") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('THUR').appendChild(div);
-            document.getElementById('THUR').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-
-          }
-          else if (daychoose == "FRI") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('FRI').appendChild(div);
-            document.getElementById('FRI').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-
-          }
-          else if (daychoose == "SAT") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('SAT').appendChild(div);
-            document.getElementById('SAT').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-
-          }
-          else if (daychoose == "SUN") {
-
-            var div = document.createElement("div");
-            div.style.position = "absolute";
-            div.style.top = top;
-            div.style.width = "100%";
-            div.style.height = height;
-            div.style.background = "blue";
-            div.style.color = "white";
-            div.innerHTML = subject;
-            div.setAttribute("id", x);
-            div.className = x;
-            div.style.paddingTop = "8px";
-            div.style.fontSize = "15px";
-            div.onclick = function () {
-              editindex = this.id;
-              document.getElementById("edit").style.display = "inherit";
-            };
-
-            var div2 = document.createElement("div");
-            div2.style.position = "absolute";
-            div2.style.top = top;
-            div2.style.width = "100%";
-            div2.style.height = "5px";
-            div2.style.background = "transparent";
-            div2.style.color = "white";
-            div2.innerHTML = combine;
-            div2.style.fontSize = "10px";
-            div2.setAttribute("id", x);
-
-
-            var div1 = document.createElement("LI");
-            button = document.createElement("BUTTON");
-            div1.style.top = "5px";
-            div1.style.width = "90%";
-            div1.style.height = "20px";
-            div1.style.background = "grey";
-            div1.style.color = "black";
-            div1.innerHTML = subject;
-            div1.setAttribute("id", x);
-            div1.className = x;
-
-            button.style.position = "absolute";
-            button.style.left = "80%";
-            button.style.width = "20%";
-            button.style.height = "20px";
-            button.id = x;
-            button.value = x;
-
-            button.onclick = function () {
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-              document.getElementById(this.id).remove();
-            };
-            button.innerHTML = "Remove";
-
-
-            var color = document.createElement("INPUT");
-            color.setAttribute("type", "color");
-            color.style.position = "absolute";
-            color.style.left = "71%";
-            color.style.width = "4%";
-            color.style.borderRadius = "10px";
-            color.style.height = "24px";
-            color.setAttribute("id", x);
-            color.className = x;
-            color.value = "#ffffff";
-            color.addEventListener('change', function () {
-
-              var length = document.getElementsByClassName(this.className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-              }
-
-              document.querySelectorAll('input[type=text]').forEach(function (el) {
-                el.style.background = "white";
-              });
-
-              document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-                el.value = "#ffffff";
-                el.style.background = "white";
-              });
-
-            });
-
-            var lab = document.createElement("LABEL");
-
-
-            var text = document.createElement("INPUT");
-            text.setAttribute("type", "text");
-            text.style.position = "absolute";
-            text.style.left = "35%";
-            text.style.width = "100px";
-            text.style.height = "20px";
-            text.style.borderRadius = "10px";
-            text.setAttribute("id", x);
-            text.className = x;
-            text.addEventListener('change', function () {
-
-
-              lab.style.position = "absolute";
-              lab.style.left = "20%";
-              lab.style.width = "100px";
-              lab.style.height = "20px";
-              lab.style.color = "white";
-              lab.setAttribute("id", x);
-              lab.className = x;
-              lab.innerHTML = this.value;
-
-              document.getElementById(this.id).innerHTML = this.value;
-              div1.appendChild(lab);
-
-
-            });
-
-            div1.appendChild(text);
-            div1.appendChild(color);
-            div1.appendChild(button);
-
-
-            document.getElementById('SUN').appendChild(div);
-            document.getElementById('SUN').appendChild(div2);
-            document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-          }
-
-          var j = document.getElementById('SUBJECTELEMENT').childElementCount;
-          var c = document.getElementById('SUBJECTELEMENT').childNodes;
-          var d = document.querySelectorAll('input[type=color]');
-          var f = document.getElementById('SUBJECTELEMENT').querySelectorAll('input[type=text]');
-
-
-
-
-          var letters = '0123456789ABCDEF';
-          var color = '#';
-
-          for (var z = 0; z < 6; z++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-
-          var w = 1;
-
-          while (w <= j) {
-
-            var str = c[w].textContent;
-            var str1 = c[j].textContent;
-
-            str = str.replace("Remove", "");
-            str1 = str1.replace("Remove", "");
-
-            if (str == str1) {
-              c[j].className = c[w].className;
-              d[w - 1].value = d[j - 1].value;
-
-              var length = document.getElementsByClassName(c[w].className).length;
-
-              for (var i = 0; i < length; i++) {
-                document.getElementsByClassName(c[w].className)[i].style.background = c[j].style.background;
-
-              }
-
-
-              c[w].id;
-
-              if (daychoose == "MON") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "TUE") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "WED") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "THUR") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "FRI") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "SAT") {
-                document.getElementById(c[w].id).className = c[w].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              } else if (daychoose == "SUN") {
-                document.getElementById(c[w].id).className = c[j].className;
-                d[w - 1].className = c[w].className;
-                f[w - 1].className = c[w].className;
-                f[w - 1].style.background = "white";
-                document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-              }
             }
-            else {
-
-              c[j].style.background = color;
-              if (daychoose == "MON") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "TUE") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "WED") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "THUR") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "FRI") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "SAT") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              } else if (daychoose == "SUN") {
-
-                document.getElementById(c[j].id).style.background = color;
-
-              }
-            }
-
-            w++;
-
+            return found;
+        
           }
+
+          linearSearch(subject, subjecttimetable)
+
+        //var found=linearSearch(subject, subjecttimetable);
+
+        if(found==false){
+          
+          color=colorgenerator();
+        }
+
+          index.push(x);
+          subjecttimetable.push(subject);
+          daytimetable.push(daychoose);
+          time_starttimetable.push(time_start);
+          time_endtimetable.push(time_end);
+          colortimetable.push(color);
+          toptimetable.push(top);
+          heighttimetable.push(height);
+   
+          x++;   
+      
 
         }
-      }).call(this, i)
+
+        
+        
+        constructtimetable();
     }
+
+    //console.log(time_starttimetable);
 
  });
 
-    document.getElementById("custom").addEventListener("click", function () {
-
-      document.getElementById('ELEMENT').style.visibility = "hidden";
-      document.getElementById('pdfview').style.visibility = "hidden";
-      document.getElementById('SUBJECTELEMENT').style.visibility = "hidden";
-      document.getElementById('CUSTOMIZEELEMENT').style.visibility = "visible";
-      document.getElementById('CUSTOMIZE').style.visibility = "visible";
-      var x = document.getElementById('SUBJECTELEMENT').childElementCount;
-      var c = document.getElementById('SUBJECTELEMENT').childNodes;
-
-      var last = c[x].className;
-      var last = parseInt(last);
-      var y = 1;
-    })
-
-
-    document.getElementById("check").addEventListener("click", function(){
-      document.getElementById('ELEMENT').style.visibility="hidden";
-      document.getElementById('pdfview').style.visibility="visible";
-      document.getElementById('SUBJECTELEMENT').style.visibility="hidden";
-      document.getElementById('CUSTOMIZE').style.visibility="hidden";
-      document.getElementById('CUSTOMIZEELEMENT').style.visibility="hidden";
-    
-    });
-
-    document.getElementById("sub").addEventListener("click", function () {
-      document.getElementById('ELEMENT').style.visibility = "visible";
-      document.getElementById('pdfview').style.visibility = "hidden";
-      document.getElementById('SUBJECTELEMENT').style.visibility = "visible";
-      document.getElementById('CUSTOMIZE').style.visibility = "hidden";
-      document.getElementById('CUSTOMIZEELEMENT').style.visibility = "hidden";
-    });
-
-
-    document.getElementById("opacity").addEventListener("change", function () {
-      var mon = document.getElementById('MON');
-      var tue = document.getElementById('TUE');
-      var wed = document.getElementById('WED');
-      var thur = document.getElementById('THUR');
-      var fri = document.getElementById('FRI');
-      var sun = document.getElementById('SUN');
-      var sat = document.getElementById('SAT');
-
-      mon.style.opacity = this.value;
-      tue.style.opacity = this.value;
-      wed.style.opacity = this.value;
-      thur.style.opacity = this.value;
-      fri.style.opacity = this.value;
-      sun.style.opacity = this.value;
-      sat.style.opacity = this.value;
-    });
-
-
-
-    document.getElementById('wallpaper').addEventListener('change', readURL, true);
-    function readURL() {
-      var file = document.getElementById("wallpaper").files[0];
-      var reader = new FileReader();
-      reader.onloadend = function () {
-        document.getElementById('imagewallpaper').style.backgroundImage = "url(" + reader.result + ")";
-      }
-      if (file) {
-        reader.readAsDataURL(file);
-      } else {
-      }
-    }
-
-    //ADD SUBJECT
-
-    function editnumberindex(x) {
-      var editindex = x;
-
-    }
-
-    function myFunction() {
-
-      var info = {{ data| safe
-    }};
-
-
-    var array = [];
-
-    var info = JSON.stringify(info);
-
-    var data = JSON.parse(info);
-
-
-    var x = (document.getElementById('SUBJECTELEMENT').childElementCount) + 1;
-
-
-
-
-    var subject = document.getElementById('timetable').value;
-
-    var day = document.getElementById('day');
-
-    var daychoose = day.options[day.selectedIndex].value;
-
-    var time_start = document.getElementById('time_start').value;
-
-    var time_end = document.getElementById('time_end').value;
-
-
-    document.getElementById("timetable").innerHTML = subject;
-
-    var period = time_start - time_end;
-    var width = period * 60;
-
-
-    //starttime
-    var fields = time_start.split(':');
-    var hour = parseInt(fields[0]);
-    var minute = parseInt(fields[1]);
-    var masa = (hour * 60) + minute;
-
-    //endtime
-    var fields1 = time_end.split(':');
-    var hour1 = parseInt(fields1[0]);
-    var minute1 = parseInt(fields1[1]);
-    var masa1 = (hour1 * 60) + minute1;
-
-    //period of subject
-    var period = ((masa1 - masa) / 60) * 60;
-
-    var periodtext = period.toString();
-
-    //width of subject
-    var height = periodtext + "px";
-
-
-    //starttime aka top width
-    var topcal = ((masa - 420) / 60) * 60;
-    var toptext = topcal.toString();
-    var top = toptext + "px";
-
-    var combine = time_start + ' - ' + time_end;
-
-    if (masa >= 420 && masa <= 1200 && masa1 >= 420 && masa1 <= 1200) {
-
-
-
-
-
-
-      if (daychoose == "MON") {
-
-
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", i);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.setAttribute("id", x);
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('MON').appendChild(div);
-        document.getElementById('MON').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-        x++;
-
-
-      }
-      else if (daychoose == "TUE") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('TUE').appendChild(div);
-        document.getElementById('TUE').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-        x++;
-
-      }
-      else if (daychoose == "WED") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('WED').appendChild(div);
-        document.getElementById('WED').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-        x++;
-
-      }
-      else if (daychoose == "THUR") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('THUR').appendChild(div);
-        document.getElementById('THUR').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-        x++;
-
-      }
-      else if (daychoose == "FRI") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('FRI').appendChild(div);
-        document.getElementById('FRI').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-        x++;
-
-      }
-      else if (daychoose == "SAT") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('SAT').appendChild(div);
-        document.getElementById('SAT').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-        x++;
-
-      }
-      else if (daychoose == "SUN") {
-
-        var div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.top = top;
-        div.style.width = "100%";
-        div.style.height = height;
-        div.style.background = "blue";
-        div.style.color = "white";
-        div.innerHTML = subject;
-        div.setAttribute("id", x);
-        div.className = x;
-        div.style.paddingTop = "8px";
-        div.style.fontSize = "15px";
-        div.onclick = function () {
-          editindex = this.id;
-          editnumberindex(this.id);
-          document.getElementById("edit").style.display = "inherit";
-        };
-
-        var div2 = document.createElement("div");
-        div2.style.position = "absolute";
-        div2.style.top = top;
-        div2.style.width = "100%";
-        div2.style.height = "5px";
-        div2.style.background = "transparent";
-        div2.style.color = "white";
-        div2.innerHTML = combine;
-        div2.style.fontSize = "10px";
-        div2.setAttribute("id", x);
-
-
-        var div1 = document.createElement("LI");
-        button = document.createElement("BUTTON");
-        div1.style.top = "5px";
-        div1.style.width = "90%";
-        div1.style.height = "20px";
-        div1.style.background = "grey";
-        div1.style.color = "black";
-        div1.innerHTML = subject;
-        div1.setAttribute("id", x);
-        div1.className = x;
-
-        button.style.position = "absolute";
-        button.style.left = "80%";
-        button.style.width = "20%";
-        button.style.height = "20px";
-        button.id = x;
-        button.value = x;
-
-        button.onclick = function () {
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-          document.getElementById(this.id).remove();
-        };
-        button.innerHTML = "Remove";
-
-
-        var color = document.createElement("INPUT");
-        color.setAttribute("type", "color");
-        color.style.position = "absolute";
-        color.style.left = "71%";
-        color.style.width = "4%";
-        color.style.borderRadius = "10px";
-        color.style.height = "24px";
-        color.setAttribute("id", x);
-        color.className = x;
-        color.value = "#ffffff";
-        color.addEventListener('change', function () {
-
-          var length = document.getElementsByClassName(this.className).length;
-
-          for (var i = 0; i < length; i++) {
-            document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-          }
-
-          document.querySelectorAll('input[type=text]').forEach(function (el) {
-            el.style.background = "white";
-          });
-
-          document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-            el.value = "#ffffff";
-            el.style.background = "white";
-          });
-
-        });
-
-        var lab = document.createElement("LABEL");
-
-
-        var text = document.createElement("INPUT");
-        text.setAttribute("type", "text");
-        text.style.position = "absolute";
-        text.style.left = "35%";
-        text.style.width = "100px";
-        text.style.height = "20px";
-        text.style.borderRadius = "10px";
-        text.setAttribute("id", x);
-        text.className = x;
-        text.addEventListener('change', function () {
-
-
-          lab.style.position = "absolute";
-          lab.style.left = "20%";
-          lab.style.width = "100px";
-          lab.style.height = "20px";
-          lab.style.color = "white";
-          lab.setAttribute("id", x);
-          lab.className = x;
-          lab.innerHTML = this.value;
-
-          document.getElementById(this.id).innerHTML = this.value;
-          div1.appendChild(lab);
-
-
-        });
-
-        div1.appendChild(text);
-        div1.appendChild(color);
-        div1.appendChild(button);
-
-
-        document.getElementById('SUN').appendChild(div);
-        document.getElementById('SUN').appendChild(div2);
-        document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-        x++;
-      }
-
-
-
-      var j = document.getElementById('SUBJECTELEMENT').childElementCount;
-      var c = document.getElementById('SUBJECTELEMENT').childNodes;
-      var d = document.querySelectorAll('input[type=color]');
-      var f = document.getElementById('SUBJECTELEMENT').querySelectorAll('input[type=text]');
-
-
-      console.log(j);
-      console.log(x);
-
-
-      var w = 1;
-
-      while (w <= j) {
-
-        var str = c[w].textContent;
-        var str1 = subject;
-
-        str = str.replace("Remove", "");
-        str1 = str1.replace("Remove", "");
-
-
-
-        if (str == str1) {
-
-          console.log(str);
-          console.log(str1);
-
-          c[j].className = c[w].className;
-          d[w - 1].value = d[j - 1].value;
-
-          var length = document.getElementsByClassName(c[w].className).length;
-
-          for (var i = 0; i <= length; i++) {
-            document.getElementsByClassName(c[j].id)[i].style.background = c[w].style.background;
-            console.log(length);
-          }
-
-
-
-          c[w].id;
-
-          if (daychoose == "MON") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "TUE") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "WED") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "THUR") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "FRI") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "SAT") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          } else if (daychoose == "SUN") {
-            document.getElementById(c[w].id).className = c[w].className;
-            d[w - 1].className = c[w].className;
-            f[w - 1].className = c[w].className;
-            f[w - 1].style.background = "white";
-            document.getElementsByClassName(c[j].className[0])[0].style.background = c[j].style.background;
-
-
-          }
-
-          break;
-        }
-        else {
-
-          console.log("tak jadi");
-
-          var letters = '0123456789ABCDEF';
-          var color = '#';
-
-          for (var z = 0; z < 6; z++) {
-            color += letters[Math.floor(Math.random() * 16)];
-          }
-
-          c[j].style.background = color;
-          if (daychoose == "MON") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "TUE") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "WED") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "THUR") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "FRI") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "SAT") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          } else if (daychoose == "SUN") {
-
-            document.getElementById(c[j].id).style.background = color;
-
-          }
-        }
-
-        w++;
-
-      }
-
-
-
-
-    }
-
-
-    function deleteRow(x) {
-      document.getElementById(x).remove();
-      document.getElementById(x).remove();
-      // var elem = document.getElementById(x);
-      // elem.parentNode.removeChild(elem);
-      //
-      // var elem = document.getElementById(x);
-      // elem.parentNode.removeChild(elem);
-    }
-
-
-    }
-
-    //EDIT THE CONTENT OF THE SUBJECT
-
-    document.getElementById("addedit").addEventListener("click", function () {
-
-
-      editnumberindex();
-
+document.getElementById("custom").addEventListener("click", function () {
+
+    document.getElementById('ELEMENT').style.visibility = "hidden";
+    document.getElementById('pdfview').style.visibility = "hidden";
+    document.getElementById('SUBJECTELEMENT').style.visibility = "hidden";
+    document.getElementById('CUSTOMIZEELEMENT').style.visibility = "visible";
+    document.getElementById('CUSTOMIZE').style.visibility = "visible";
+    var x = document.getElementById('SUBJECTELEMENT').childElementCount;
+    var c = document.getElementById('SUBJECTELEMENT').childNodes;
+
+    var last = c[x].className;
+    var last = parseInt(last);
+    var y = 1;
+  })
+
+document.getElementById("check").addEventListener("click", function () {
+   document.getElementById('ELEMENT').style.visibility = "hidden";
+   document.getElementById('pdfview').style.visibility = "visible";
+   document.getElementById('SUBJECTELEMENT').style.visibility = "hidden";
+   document.getElementById('CUSTOMIZE').style.visibility = "hidden";
+   document.getElementById('CUSTOMIZEELEMENT').style.visibility = "hidden";
+
+ });
+
+document.getElementById("sub").addEventListener("click", function () {
+   document.getElementById('ELEMENT').style.visibility = "visible";
+   document.getElementById('pdfview').style.visibility = "hidden";
+   document.getElementById('SUBJECTELEMENT').style.visibility = "visible";
+   document.getElementById('CUSTOMIZE').style.visibility = "hidden";
+   document.getElementById('CUSTOMIZEELEMENT').style.visibility = "hidden";
+ });
+
+document.getElementById("opacity").addEventListener("change", function () {
+   var mon = document.getElementById('MON');
+   var tue = document.getElementById('TUE');
+   var wed = document.getElementById('WED');
+   var thur = document.getElementById('THUR');
+   var fri = document.getElementById('FRI');
+   var sun = document.getElementById('SUN');
+   var sat = document.getElementById('SAT');
+
+   mon.style.opacity = this.value;
+   tue.style.opacity = this.value;
+   wed.style.opacity = this.value;
+   thur.style.opacity = this.value;
+   fri.style.opacity = this.value;
+   sun.style.opacity = this.value;
+   sat.style.opacity = this.value;
+ });
+
+document.getElementById('wallpaper').addEventListener('change', readURL, true);
+  function readURL() {
+   var file = document.getElementById("wallpaper").files[0];
+   var reader = new FileReader();
+   reader.onloadend = function () {
+     document.getElementById('imagewallpaper').style.backgroundImage = "url(" + reader.result + ")";
+   }
+   if (file) {
+     reader.readAsDataURL(file);
+   } else {
+   }
+ }
+
+ //ADD SUBJECT
+ function create(top,height,subject,x,daychoose,time_start,time_end,color){
+
+    var div = document.createElement("div");
+    div.style.position = "absolute";
+    div.style.top = top;
+    div.style.width = "100%";
+    div.style.height = height;
+    div.style.background = color;
+    div.style.color = "white";
+    div.setAttribute("id", x);
+    div.className = x;
+  
+    div.onclick = function () {
+
+      editindex = this.id;
       console.log(editindex);
-      var elem = document.getElementById(editindex);
-      elem.parentNode.removeChild(elem);
+      document.getElementById("edit").style.visibility = "visible";
 
-      var elem = document.getElementById(editindex);
-      elem.parentNode.removeChild(elem);
+      document.getElementById('delete').addEventListener("click", function (){
 
 
+            for(var i=0;i<index.length;i++){
 
-
-      var x = (document.getElementById('SUBJECTELEMENT').childElementCount) + 1;
-
-
-      var subject = document.getElementById('timetableedit').value;
-
-      var day = document.getElementById('dayedit');
-
-      var daychoose = day.options[day.selectedIndex].value;
-
-      var time_start = document.getElementById('time_startedit').value;
-
-      var time_end = document.getElementById('time_endedit').value;
-
-      document.getElementById("timetableedit").innerHTML = subject;
-
-
-      var period = time_start - time_end;
-      var width = period * 60;
-
-
-      //starttime
-      var fields = time_start.split(':');
-      var hour = parseInt(fields[0]);
-      var minute = parseInt(fields[1]);
-      var masa = (hour * 60) + minute;
-
-      //endtime
-      var fields1 = time_end.split(':');
-      var hour1 = parseInt(fields1[0]);
-      var minute1 = parseInt(fields1[1]);
-      var masa1 = (hour1 * 60) + minute1;
-
-
-      //period of subject
-      var period = ((masa1 - masa) / 60) * 60;
-
-      var periodtext = period.toString();
-
-      //width of subject
-      var height = periodtext + "px";
-
-
-      //starttime aka top width
-      var topcal = ((masa - 420) / 60) * 60;
-      var toptext = topcal.toString();
-      var top = toptext + "px";
-
-      var combine = time_start + ' - ' + time_end;
-
-      if (masa >= 420 && masa <= 1200 && masa1 >= 420 && masa1 <= 1200) {
-
-
-
-
-
-
-        if (daychoose == "MON") {
-
-
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", i);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.setAttribute("id", x);
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
+              if(editindex==index[i]){
+                index.splice(i,1);
+                subjecttimetable.splice(i,1);
+                daytimetable.splice(i,1);
+                time_starttimetable.splice(i,1);
+                time_endtimetable.splice(i,1);
+                colortimetable.splice(i,1);
+                toptimetable.splice(i,1);
+                heighttimetable.splice(i,1);
+              }
 
             }
 
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
+     
 
 
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
+         deleteRow(editindex);
+         document.getElementById('edit').style.visibility="hidden";
+      });
 
 
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
+      for(var i=0;i<index.length;i++){
 
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
+        
 
+        if(editindex==index[i]){
+           document.getElementById('subjectedit').value = subjecttimetable[i];
 
-          });
+          document.getElementById('dayedit');
 
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('MON').appendChild(div);
-          document.getElementById('MON').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-
-          x++;
-
-
+          day.options[day.selectedIndex].value = daytimetable[i];
+     
+          document.getElementById('time_startedit').value = time_starttimetable[i].trim();
+     
+           document.getElementById('time_endedit').value = time_endtimetable[i].trim();
+     
+           document.getElementById('coloredit').value = colortimetable[i];
         }
-        else if (daychoose == "TUE") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('TUE').appendChild(div);
-          document.getElementById('TUE').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-          x++;
-
-        }
-        else if (daychoose == "WED") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('WED').appendChild(div);
-          document.getElementById('WED').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-          x++;
-
-        }
-        else if (daychoose == "THUR") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('THUR').appendChild(div);
-          document.getElementById('THUR').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-          x++;
-
-        }
-        else if (daychoose == "FRI") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('FRI').appendChild(div);
-          document.getElementById('FRI').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-          x++;
-
-        }
-        else if (daychoose == "SAT") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('SAT').appendChild(div);
-          document.getElementById('SAT').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-
-          x++;
-
-        }
-        else if (daychoose == "SUN") {
-
-          var div = document.createElement("div");
-          div.style.position = "absolute";
-          div.style.top = top;
-          div.style.width = "100%";
-          div.style.height = height;
-          div.style.background = "blue";
-          div.style.color = "white";
-          div.innerHTML = subject;
-          div.setAttribute("id", x);
-          div.className = x;
-          div.style.paddingTop = "8px";
-          div.style.fontSize = "15px";
-          div.onclick = function () {
-            editindex = this.id;
-            document.getElementById("edit").style.display = "inherit";
-          };
-
-          var div2 = document.createElement("div");
-          div2.style.position = "absolute";
-          div2.style.top = top;
-          div2.style.width = "100%";
-          div2.style.height = "5px";
-          div2.style.background = "transparent";
-          div2.style.color = "white";
-          div2.innerHTML = combine;
-          div2.style.fontSize = "10px";
-          div2.setAttribute("id", x);
-
-
-          var div1 = document.createElement("LI");
-          button = document.createElement("BUTTON");
-          div1.style.top = "5px";
-          div1.style.width = "90%";
-          div1.style.height = "20px";
-          div1.style.background = "grey";
-          div1.style.color = "black";
-          div1.innerHTML = subject;
-          div1.setAttribute("id", x);
-          div1.className = x;
-
-          button.style.position = "absolute";
-          button.style.left = "80%";
-          button.style.width = "20%";
-          button.style.height = "20px";
-          button.id = x;
-          button.value = x;
-
-          button.onclick = function () {
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-            document.getElementById(this.id).remove();
-          };
-          button.innerHTML = "Remove";
-
-
-          var color = document.createElement("INPUT");
-          color.setAttribute("type", "color");
-          color.style.position = "absolute";
-          color.style.left = "71%";
-          color.style.width = "4%";
-          color.style.borderRadius = "10px";
-          color.style.height = "24px";
-          color.setAttribute("id", x);
-          color.className = x;
-          color.value = "#ffffff";
-          color.addEventListener('change', function () {
-
-            var length = document.getElementsByClassName(this.className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(this.className)[i].style.background = this.value;
-
-            }
-
-            document.querySelectorAll('input[type=text]').forEach(function (el) {
-              el.style.background = "white";
-            });
-
-            document.querySelectorAll('input[type=color]').forEach(function (el) {
-
-              el.value = "#ffffff";
-              el.style.background = "white";
-            });
-
-          });
-
-          var lab = document.createElement("LABEL");
-
-
-          var text = document.createElement("INPUT");
-          text.setAttribute("type", "text");
-          text.style.position = "absolute";
-          text.style.left = "35%";
-          text.style.width = "100px";
-          text.style.height = "20px";
-          text.style.borderRadius = "10px";
-          text.setAttribute("id", x);
-          text.className = x;
-          text.addEventListener('change', function () {
-
-
-            lab.style.position = "absolute";
-            lab.style.left = "20%";
-            lab.style.width = "100px";
-            lab.style.height = "20px";
-            lab.style.color = "white";
-            lab.setAttribute("id", x);
-            lab.className = x;
-            lab.innerHTML = this.value;
-
-            document.getElementById(this.id).innerHTML = this.value;
-            div1.appendChild(lab);
-
-
-          });
-
-          div1.appendChild(text);
-          div1.appendChild(color);
-          div1.appendChild(button);
-
-
-          document.getElementById('SUN').appendChild(div);
-          document.getElementById('SUN').appendChild(div2);
-          document.getElementById('SUBJECTELEMENT').appendChild(div1);
-
-          x++;
-        }
-
-
-
-        var j = document.getElementById('SUBJECTELEMENT').childElementCount;
-        var c = document.getElementById('SUBJECTELEMENT').childNodes;
-        var d = document.querySelectorAll('input[type=color]');
-        var f = document.getElementById('SUBJECTELEMENT').querySelectorAll('input[type=text]');
-
-
-        var letters = '0123456789ABCDEF';
-        var color = document.getElementById("coloredit").value;
-
-        var w = 1;
-
-        while (w <= j) {
-
-          var str = c[w].textContent;
-          var str1 = c[j].textContent;
-
-          str = str.replace("Remove", "");
-          str1 = str1.replace("Remove", "");
-
-          if (str == str1) {
-
-            c[j].className = c[w].className;
-            d[w - 1].value = d[j - 1].value;
-
-            var length = document.getElementsByClassName(c[w].className).length;
-
-            for (var i = 0; i < length; i++) {
-              document.getElementsByClassName(c[w].className)[i].style.background = c[j].style.background;
-
-            }
-
-
-
-            c[w].id;
-
-            if (daychoose == "MON") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "TUE") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "WED") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "THUR") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "FRI") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "SAT") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            } else if (daychoose == "SUN") {
-              document.getElementById(c[w].id).className = c[w].className;
-              d[w - 1].className = c[w].className;
-              f[w - 1].className = c[w].className;
-              f[w - 1].style.background = "white";
-              document.getElementsByClassName(c[j].className[0])[0].style.background = c[w].style.background;
-
-
-            }
-          }
-          else {
-
-
-
-            c[j].style.background = color;
-            if (daychoose == "MON") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "TUE") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "WED") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "THUR") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "FRI") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "SAT") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            } else if (daychoose == "SUN") {
-
-              document.getElementById(c[j].id).style.background = color;
-
-            }
-          }
-
-          w++;
-
-        }
-
-
-
-        console.log(document.getElementsByClassName(1));
       }
-      document.getElementById("edit").style.display = "none";
-    });
+
+      document.getElementById('doneedit').addEventListener("click", function (){
+        editsubject(editindex);
+      });
 
 
-  </script>
+     
+
+      
+
+      //console.log(index);
+    };
+
+    var textforsub = document.createElement("H1") ;    
+    var textsubject = document.createTextNode(subject);
+    textforsub.style.position="absolute";
+    textforsub.style.top="5px";
+    textforsub.style.fontSize = "15px";
+    textforsub.style.marginLeft="3px";
+    textforsub.style.marginTop="7px";
+    textforsub.style.fontFamily=" Calibri";
+
+    textforsub.appendChild(textsubject);
+    div.appendChild(textforsub);
+
+   
+
+    var ts = document.createElement("H1") ;    
+    var hs = document.createTextNode(time_start.toString());
+    ts.appendChild(hs);
+    ts.style.position="absolute";
+    ts.style.top = 0;
+    ts.style.color = "white";
+    ts.style.fontSize = "10px";
+    ts.style.marginTop="-0.05px";
+    ts.style.margin="3px";
+
+    var te = document.createElement("H1") ;    
+    var he = document.createTextNode(time_end.toString());
+    te.appendChild(he);
+    te.style.position="absolute";
+    te.style.bottom = 0;
+    te.style.right = 0;
+    te.style.color = "white";
+    te.style.fontSize = "10px";
+    te.style.margin="3px";
+
+    div.appendChild(ts);  
+    div.appendChild(te);  
+    
+
+
+    document.getElementById(daychoose).appendChild(div);
+    //document.getElementById(daychoose).appendChild(div2);
+   
+
+
+  }
+
+ function editnumberindex(x) {
+   var editindex = x;
+ }
+
+function myFunction(){
+var enable;
+
+enable=enablingbutton();
+
+
+   var x = index.length;
+
+   console.log(x);
+
+   var subject = document.getElementById('subjectadd').value;
+
+   var day = document.getElementById('day');
+
+  var daychoose = day.options[day.selectedIndex].value;
+
+   var time_start = document.getElementById('time_start').value;
+
+   var time_end = document.getElementById('time_end').value;
+
+   var color = document.getElementById('coloradd').value;
+
+   var period = time_start - time_end;
+   var width = period * 60;
+
+
+   //starttime
+   var fields = time_start.split(':');
+   var hour = parseInt(fields[0]);
+   var minute = parseInt(fields[1]);
+   var masa = (hour * 60) + minute;
+
+   //endtime
+   var fields1 = time_end.split(':');
+   var hour1 = parseInt(fields1[0]);
+   var minute1 = parseInt(fields1[1]);
+   var masa1 = (hour1 * 60) + minute1;
+
+   //period of subject
+   var period = ((masa1 - masa) / 60) * 60;
+
+   var periodtext = period.toString();
+
+   //width of subject
+   var height = periodtext + "px";
+
+
+   //starttime aka top width
+   var topcal = ((masa - 420) / 60) * 60;
+   var toptext = topcal.toString();
+   var top = toptext + "px";
+
+   var combine = time_start + ' - ' + time_end;
+
+   if (masa >= 420 && masa <= 1200 && masa1 >= 420 && masa1 <= 1200) {
+
+       index.push(x);
+       subjecttimetable.push(subject);
+       daytimetable.push(daychoose);
+       time_starttimetable.push(time_start);
+       time_endtimetable.push(time_end);
+       colortimetable.push(color);
+       toptimetable.push(top);
+       heighttimetable.push(height);
+
+       x++;   
+      
+       console.log(time_start);
+   }
+
+   document.getElementById('addsub').style.visibility="hidden";
+   constructtimetable();
+ 
+
+ 
+ }
+
+ function deleteRow(x) {
+
+   document.getElementById(x).remove();
+ 
+
+ }
+
+function editsubject(editindex){
+  var enable;
+
+  enable=enablingbutton();
+
+
+     var x = editindex;
+
+     var subject = document.getElementById('subjectedit').value;
+
+     var day = document.getElementById('day');
+
+     var daychoose = day.options[day.selectedIndex].value;
+
+     var time_start = document.getElementById('time_startedit').value;
+
+     var time_end = document.getElementById('time_endedit').value;
+
+     var color = document.getElementById('coloreditedit').value;
+
+     var period = time_start - time_end;
+     var width = period * 60;
+
+
+     //starttime
+     var fields = time_start.split(':');
+     var hour = parseInt(fields[0]);
+     var minute = parseInt(fields[1]);
+     var masa = (hour * 60) + minute;
+
+     //endtime
+     var fields1 = time_end.split(':');
+     var hour1 = parseInt(fields1[0]);
+     var minute1 = parseInt(fields1[1]);
+     var masa1 = (hour1 * 60) + minute1;
+
+     //period of subject
+     var period = ((masa1 - masa) / 60) * 60;
+
+     var periodtext = period.toString();
+
+     //width of subject
+     var height = periodtext + "px";
+
+
+     //starttime aka top width
+     var topcal = ((masa - 420) / 60) * 60;
+     var toptext = topcal.toString();
+     var top = toptext + "px";
+
+     var combine = time_start + ' - ' + time_end;
+
+     if (masa >= 420 && masa <= 1200 && masa1 >= 420 && masa1 <= 1200) {
+
+     
+      index.push(x);
+      subjecttimetable.push(subject);
+      daytimetable.push(daychoose);
+      time_starttimetable.push(time_start);
+      time_endtimetable.push(time_end);
+      colortimetable.push(color);
+      toptimetable.push(top);
+      heighttimetable.push(height);
+
+
+       }
+
+       constructtimetable();
+       
+}
+
+
+
+
+
+
+
+
+
+</script>
+
+
 
 
 
